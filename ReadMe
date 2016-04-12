@@ -1,4 +1,39 @@
 Custom Spinner
 
 기존 스피너 사용법에서 참고만 할 것.
-주석처리된 부분으로 커스텀하여 사용할 수 있다.
+주석처리된 부분을 활용하여 스피너를 커스텀하여 사용할 수 있다.
+
+R.layout.item_spinner 는 TextView + ImageView
+R.layout.item_spinner_dropdown 은 TextView 이다.
+
+		// 1번은 스피너가 눌려지지 않았을 때 첫 모습을 커스텀하는 것. 
+		// 1. myAdapter = new MyAdapter(context, R.layout.item_spinner, arrayImages);
+		// 2번은 스피너를 눌렀을 때 펼쳐지는 모습을 커스텀하는 것.
+		// 2. myAdapter.setDropDownViewResource(R.layout.item_spinner_dropdown);
+		
+		// inflater가 필요한데 Adpater 생성자에서 작성해준다.
+		// this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+
+		@Override
+		public View getView(int pos, View cnvtView, ViewGroup prnt) {
+			 // 이곳은 1번의 모습을 정의
+			 View view = inflater.inflate(R.layout.item_spinner, parent, false);
+			 TextView tvValue = (TextView) view.findViewById(R.id.tv_spitem);
+			 tvValue.setText("");
+			 // ImageView의 Image도 변경하고 싶으면 커스텀하면 된다.
+			
+			 return view;			
+		}
+		
+		@Override
+		public View getDropDownView(int position, View cnvtView, ViewGroup prnt) {
+			// 이곳은 2번의 모습을 정의
+			 View view = inflater.inflate(R.layout.item_spinner_dropdown, parent, false);
+			 TextView tvValue = (TextView) view.findViewById(R.id.tv_spitem);
+			 tvValue.setText("");
+			
+			 return view;
+		}
+
+
